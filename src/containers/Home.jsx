@@ -25,7 +25,10 @@ const Home = () => {
       <h1>Pokedex</h1>
       <p>Search for Pokemon by name.</p>
       <input type="text" value={search} onChange={handleChange} />
-      <PokeList search={search} allPokemon={allPokemon} />
+      <PokeList
+        search={search.toLowerCase()}
+        allPokemon={allPokemon}
+      />
     </>
   );
 };
