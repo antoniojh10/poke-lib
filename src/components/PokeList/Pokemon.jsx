@@ -2,6 +2,7 @@ import React from 'react';
 
 // Components
 import TypeBadge from './TypeBadge';
+import Loader from '../Loader';
 
 // Utils
 import capitalize from '../../utils/capitalized';
@@ -40,7 +41,7 @@ const Pokemon = ({ data }) => {
       </div>
     </div>
   ) : (
-    <h1>Loading...</h1>
+    <Loader />
   );
 };
 
