@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "A place to save your pokemon list",
   "main": "index.js",
+  "homepage": "http://antoniojh10.github.io/poke-lib",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
+    "deploy:gh": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Antonio Hernández",
