@@ -4,10 +4,23 @@
   border-radius: 1rem;
   width: 100%;
 
+  &:last-child {
+    margin-bottom: 3rem;
+  }
+
   @media (min-width: $desktop) {
     width: 31%;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
+
+    &:first-child,
+    &:nth-child(4n) {
+      margin-left: 0;
+    }
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
   }
 
   &.normal {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Header from '../components/Header';
+import Header from './Header';
 import Home from '../containers/Home';
 
 // Styles

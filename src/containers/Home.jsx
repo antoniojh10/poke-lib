@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import api from '../lib/api';
 
 // Components
 import PokeList from '../components/PokeList';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [allPokemon, setAllPokemon] = useState([]);
