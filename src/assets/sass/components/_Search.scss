@@ -1,0 +1,24 @@
+.Search {
+  position: relative;
+
+  input {
+    padding-left: 2rem;
+    font-size: 0.8rem;
+  }
+
+  svg {
+    position: absolute;
+    left: 0;
+    margin: 0.5rem;
+    color: $gray;
+    -webkit-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+  }
+
+  input:focus ~ svg,
+  input:active ~ svg {
+    color: $black;
+    -webkit-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+  }
+}

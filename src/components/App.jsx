@@ -1,6 +1,7 @@
 import React from 'react';
 
 // Components
+import Header from '../components/Header';
 import Home from '../containers/Home';
 
 // Styles
@@ -9,6 +10,7 @@ import '../assets/sass/App.scss';
 const App = () => {
   return (
     <>
+      <Header />
       <Home />
     </>
   );

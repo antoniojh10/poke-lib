@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../lib/api';
 
 // Components
 import PokeList from '../components/PokeList';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -24,7 +26,16 @@ const Home = () => {
     <>
       <h1>Pokedex</h1>
       <p>Search for Pokemon by name.</p>
-      <input type="text" value={search} onChange={handleChange} />
+      <div className="Search">
+        <input
+          type="text"
+          value={search}
+          onChange={handleChange}
+          placeholder="What pokemon are you looking for?"
+        />
+        <FontAwesomeIcon icon={faSearch} />
+      </div>
+
       <PokeList
         search={search.toLowerCase()}
         allPokemon={allPokemon}
