@@ -1,0 +1,17 @@
+// Here will be only the imports of the partials.
+
+// libs
+@import './lib/Variables';
+@import './lib/extends';
+@import './lib/mixins';
+
+// HTML Elements
+// Body, #app and h1
+@import './html/App';
+
+@import './html/input';
+
+// Components
+@import './components/Pokemon';
+@import './components/PokeList';
+@import './components/Card';

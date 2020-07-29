@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  @extend %full-page;
+  @extend %center-h;
+  font-family: $MontseR;
+}
+
+#app {
+  width: 100vw;
+  padding: 5vw;
+  background-color: $white;
+}
+
+h1 {
+  font-family: $MontseM;
+}
