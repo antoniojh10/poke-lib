@@ -1,26 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import api from '../../lib/api';
 
+// Actions
+import { setPokemonBasic } from '../../actions';
+
 // Components
 import Pokemon from './Pokemon';
 
-const Card = ({ pokemon }) => {
+const Card = (props) => {
+  const { pokemon } = props;
   const [info, setInfo] = useState({});
   const [types, setTypes] = useState([]);
+
+  const handleTypes = (poke) => {
+    const typesList = Object.keys(poke.types).map((index) => {
+      return poke.types[index].type.name;
+    });
+    setTypes(typesList);
+  };
 
   useEffect(() => {
     async function fetchPokemon() {
       const response = await api.callPokemon(pokemon.name);
       setInfo({ ...response });
+      props.setPokemonBasic({ ...response });
 
-      const typesList = Object.keys(response.types).map((index) => {
-        return response.types[index].type.name;
-      });
-      setTypes(typesList);
+      handleTypes(response);
     }
-    fetchPokemon();
+
+    const found = props.pokemons.find(
+      (elem) => elem.name === pokemon.name
+    );
+
+    if (found) {
+      console.log('ya lo tenemos');
+      setInfo({ ...found });
+      handleTypes(found);
+    } else {
+      fetchPokemon();
+    }
+
     return () => {
       setInfo({});
     };
@@ -35,4 +57,12 @@ const Card = ({ pokemon }) => {
   );
 };
 
-export default Card;
+const mapStateToProps = (state) => ({
+  pokemons: state.pokemons,
+});
+
+const mapDispatchToProps = {
+  setPokemonBasic,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

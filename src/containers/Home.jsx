@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import api from '../lib/api';
 
+// Actions
+import { setPokemonList } from '../actions';
+
 // Components
 import PokeList from '../components/PokeList';
 
-const Home = () => {
-  const [allPokemon, setAllPokemon] = useState([]);
+const Home = (props) => {
+  const { allPokemon } = props;
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     async function fetchAllPokemon() {
       const response = await api.getAllPokemon();
-      setAllPokemon([...response.results]);
+      props.setPokemonList([...response.results]);
     }
+
     fetchAllPokemon();
+    console.log(allPokemon.length);
   }, []);
 
   const handleChange = (event) => {
@@ -44,4 +51,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  allPokemon: state.allPokemon,
+});
+
+const mapDispatchToProps = {
+  setPokemonList,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

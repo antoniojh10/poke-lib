@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 
 // Components
 import TypeBadge from './TypeBadge';
@@ -32,12 +33,14 @@ const Pokemon = ({ data }) => {
         </div>
       </div>
       <div>
-        <img
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${formatId(
-            id
-          )}.png`}
-          alt={name}
-        />
+        <LazyLoad placeholder={<Loader />} height={200} offset={200}>
+          <img
+            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${formatId(
+              id
+            )}.png`}
+            alt={name}
+          />
+        </LazyLoad>
       </div>
     </div>
   ) : (

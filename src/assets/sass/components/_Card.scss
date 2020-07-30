@@ -4,12 +4,16 @@
   border-radius: 1rem;
   width: 100%;
 
-  &:last-child {
-    margin-bottom: 3rem;
+  .lds-ellipsis {
+    margin-left: 35%;
+
+    div {
+      background: $white;
+    }
   }
 
   @media (min-width: $desktop) {
-    width: 31%;
+    min-width: 100%;
   }
 
   &.normal {

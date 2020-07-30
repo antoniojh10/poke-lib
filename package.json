@@ -43,11 +43,14 @@
   },
   "dependencies": {
     "@babel/runtime": "7.10.5",
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
+    "@fortawesome/fontawesome-svg-core": "1.2.30",
+    "@fortawesome/free-solid-svg-icons": "5.14.0",
+    "@fortawesome/react-fontawesome": "0.1.11",
     "classnames": "2.2.6",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-lazyload": "3.0.0",
+    "react-redux": "7.2.1",
+    "redux": "4.0.5"
   }
 }

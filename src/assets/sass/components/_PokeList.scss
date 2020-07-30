@@ -1,7 +1,17 @@
 .PokeList {
+  margin-bottom: 3rem;
   @media (min-width: $desktop) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    & > div {
+      min-width: 31%;
+      @extend %center-total;
+    }
+  }
+
+  .lds-ellipsis div {
+    background: $black;
   }
 }
