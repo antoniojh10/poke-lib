@@ -1,0 +1,37 @@
+@import '../Globals.scss';
+
+.Header {
+  @extend %d-flex;
+  justify-content: flex-end;
+
+  div button {
+    margin: 0.5rem 0;
+    background-color: transparent;
+    border: none;
+
+    svg {
+      font-size: 1.5rem;
+    }
+
+    &:not(:nth-child(1)) {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .return {
+    display: none;
+  }
+  .organize {
+    display: block;
+  }
+
+  &.isPokemon {
+    justify-content: flex-start;
+    .return {
+      display: block;
+    }
+    .organize {
+      display: none;
+    }
+  }
+}

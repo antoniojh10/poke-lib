@@ -1,0 +1,107 @@
+@import '../Globals.scss';
+
+.Pokemon {
+  @extend %d-flex;
+  position: relative;
+  * {
+    z-index: 2;
+  }
+
+  img {
+    max-height: 10rem;
+    position: absolute;
+    right: -1rem;
+    top: -3rem;
+  }
+
+  p {
+    margin: 0;
+    color: $black;
+  }
+
+  h1 {
+    line-height: 1;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+    color: $white;
+  }
+
+  .types {
+    @extend %d-flex;
+    $darking-type: 10%;
+    font-size: 0.8rem;
+
+    div {
+      @extend %center-v;
+      border-radius: 3px;
+      margin: 0 0.2rem;
+      padding: 0.25rem 0.5rem;
+      color: $white;
+
+      img,
+      .icon {
+        fill: #ffffff;
+        $icon: 0.8rem;
+        position: static;
+        max-height: $icon;
+        width: $icon;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .normal {
+      @include bg-color('normal', $darking-type);
+    }
+    .fighting {
+      @include bg-color('fighting', $darking-type);
+    }
+    .flying {
+      @include bg-color('flying', $darking-type);
+    }
+    .poison {
+      @include bg-color('poison', $darking-type);
+    }
+    .ground {
+      @include bg-color('ground', $darking-type);
+    }
+    .rock {
+      @include bg-color('rock', $darking-type);
+    }
+    .bug {
+      @include bg-color('bug', $darking-type);
+    }
+    .ghost {
+      @include bg-color('ghost', $darking-type);
+    }
+    .steel {
+      @include bg-color('steel', $darking-type);
+    }
+    .fire {
+      @include bg-color('fire', $darking-type);
+    }
+    .water {
+      @include bg-color('water', $darking-type);
+    }
+    .grass {
+      @include bg-color('grass', $darking-type);
+    }
+    .electric {
+      @include bg-color('electric', $darking-type);
+    }
+    .psychic {
+      @include bg-color('psychic', $darking-type);
+    }
+    .ice {
+      @include bg-color('ice', $darking-type);
+    }
+    .dragon {
+      @include bg-color('dragon', $darking-type);
+    }
+    .dark {
+      @include bg-color('dark', $darking-type);
+    }
+    .fairy {
+      @include bg-color('fairy', $darking-type);
+    }
+  }
+}
