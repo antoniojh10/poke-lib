@@ -1,17 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
   entry: {
     app: path.resolve(__dirname, './src/index.js'),
   },
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
-    publicPath: '/poke-lib/',
+    publicPath: 'http://localhost:9000/',
     chunkFilename: 'js/[id].[chunkhash].js',
   },
   resolve: {
@@ -30,22 +29,16 @@ module.exports = {
       },
       {
         test: /\.(s*)css$/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader },
-          'css-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|gif|jpg|jpeg|svg|woff|eot|ttf|svg|mp4|webm)$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 1000,
+            limit: 90000,
             fallback: 'file-loader',
-            name: '[hash].[ext]',
-            publicPath: '/poke-lib/assets',
-            outputPath: 'assets',
+            outputPath: 'assets/',
           },
         },
       },
@@ -56,21 +49,17 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    open: true,
+    port: 9000,
+    hot: true,
+    historyApiFallback: true,
+  },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve('./public/index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
-    }),
-    new webpack.DllReferencePlugin({
-      manifest: require('./modules-manifest.json'),
-    }),
-    new AddAssetHtmlPlugin({
-      filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
-      outputPath: 'js',
-      publicPath: '/poke-lib/js',
+      template: path.resolve(__dirname, 'public/index.html'),
     }),
   ],
 };

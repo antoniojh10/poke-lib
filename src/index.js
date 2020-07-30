@@ -12,6 +12,8 @@ const initialState = {
   pokemons: [],
 };
 
+console.log(`This platform is ${process.platform}`);
+
 const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, initialState, composeEnhancers());
