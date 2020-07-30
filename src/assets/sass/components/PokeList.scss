@@ -1,13 +1,25 @@
+@import '../Globals.scss';
+
 .PokeList {
   margin-bottom: 3rem;
+
+  & > a {
+    min-height: 10rem;
+    text-decoration: none;
+    @extend %center-total;
+
+    &.show {
+      min-height: auto;
+    }
+  }
+
   @media (min-width: $desktop) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 
-    & > div {
+    & > a {
       min-width: 31%;
-      @extend %center-total;
     }
   }
 

@@ -30,7 +30,16 @@ $type: (
 }
 
 @mixin bg-type-image($type-key: 'normal') {
-  background-image: #{'url(../img/'}#{$type-key}#{'.svg)'};
+  background-image: #{'url(../../img/'}#{$type-key}#{'.svg)'};
   background-position: left top;
   background-size: 60%;
+}
+
+@mixin pokeCard($type-key: 'normal') {
+  @include bg-color($type-key);
+  @include card-shadow($type-key);
+  @include bg-type-image($type-key);
+  &:hover {
+    border: 1px solid darken(map-get($type, $type-key), 20%);
+  }
 }

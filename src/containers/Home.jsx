@@ -9,7 +9,11 @@ import api from '../lib/api';
 import { setPokemonList } from '../actions';
 
 // Components
+import Header from '../components/Header';
 import PokeList from '../components/PokeList';
+
+// styles
+import '../assets/sass/components/Home.scss';
 
 const Home = (props) => {
   const { allPokemon } = props;
@@ -31,6 +35,7 @@ const Home = (props) => {
 
   return (
     <>
+      <Header />
       <h1>Pokedex</h1>
       <p>Search for Pokemon by name.</p>
       <div className="Search">

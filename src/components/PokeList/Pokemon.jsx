@@ -8,6 +8,9 @@ import Loader from '../Loader';
 // Utils
 import capitalize from '../../utils/capitalized';
 
+// styles
+import '../../assets/sass/components/Pokemon.scss';
+
 const Pokemon = ({ data }) => {
   const { id, name, types } = data;
 
@@ -33,14 +36,13 @@ const Pokemon = ({ data }) => {
         </div>
       </div>
       <div>
-        <LazyLoad placeholder={<Loader />} height={200} offset={200}>
-          <img
-            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${formatId(
-              id
-            )}.png`}
-            alt={name}
-          />
-        </LazyLoad>
+        <img
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${formatId(
+            id
+          )}.png`}
+          loading="lazy"
+          alt={name}
+        />
       </div>
     </div>
   ) : (

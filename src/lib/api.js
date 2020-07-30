@@ -1,8 +1,9 @@
 const apiBaseURL = 'https://pokeapi.co/api/v2/';
+const count = 807;
 
 const api = {
   getAllPokemon: async () => {
-    const url = `${apiBaseURL}pokemon/?limit=807`;
+    const url = `${apiBaseURL}pokemon/?limit=${count}`;
     try {
       const response = await fetch(url);
       const data = await response.json();

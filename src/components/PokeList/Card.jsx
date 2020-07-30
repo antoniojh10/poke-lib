@@ -1,52 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import api from '../../lib/api';
-
-// Actions
-import { setPokemonBasic } from '../../actions';
+// Hooks
+import useOnePokemon from '../../hooks/useOnePokemon';
 
 // Components
 import Pokemon from './Pokemon';
+import Loader from '../Loader';
+
+// styles
+import '../../assets/sass/components/Card.scss';
 
 const Card = (props) => {
   const { pokemon } = props;
-  const [info, setInfo] = useState({});
-  const [types, setTypes] = useState([]);
-
-  const handleTypes = (poke) => {
-    const typesList = Object.keys(poke.types).map((index) => {
-      return poke.types[index].type.name;
-    });
-    setTypes(typesList);
-  };
-
-  useEffect(() => {
-    async function fetchPokemon() {
-      const response = await api.callPokemon(pokemon.name);
-      setInfo({ ...response });
-      props.setPokemonBasic({ ...response });
-
-      handleTypes(response);
-    }
-
-    const found = props.pokemons.find(
-      (elem) => elem.name === pokemon.name
-    );
-
-    if (found) {
-      console.log('ya lo tenemos');
-      setInfo({ ...found });
-      handleTypes(found);
-    } else {
-      fetchPokemon();
-    }
-
-    return () => {
-      setInfo({});
-    };
-  }, [pokemon]);
+  const { info, types } = useOnePokemon(pokemon.name);
 
   const cardClass = classNames('Card', types[0]);
 
@@ -57,12 +25,39 @@ const Card = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemons,
-});
+const LazyCard = (props) => {
+  const [show, setShow] = useState(false);
+  const elementRef = useRef();
 
-const mapDispatchToProps = {
-  setPokemonBasic,
+  useEffect(() => {
+    const onChange = (entries) => {
+      const elem = entries[0];
+      if (elem.isIntersecting) {
+        setShow(true);
+        // eslint-disable-next-line no-use-before-define
+        observer.disconnect();
+      }
+    };
+
+    const observer = new IntersectionObserver(onChange, {
+      rootMargin: '100px',
+    });
+
+    observer.observe(elementRef.current);
+    return () => observer.disconnect();
+  }, [show]);
+
+  const linkClass = classNames({ show });
+
+  return (
+    <Link
+      className={linkClass}
+      ref={elementRef}
+      to={`/pokemon/${props.pokemon.name}`}
+    >
+      {show ? <Card pokemon={props.pokemon} /> : null}
+    </Link>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default LazyCard;
