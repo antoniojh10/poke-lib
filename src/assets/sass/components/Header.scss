@@ -3,8 +3,11 @@
 .Header {
   @extend %d-flex;
   justify-content: flex-end;
+  position: relative;
+  z-index: 10;
 
-  div button {
+  div button,
+  div a {
     margin: 0.5rem 0;
     background-color: transparent;
     border: none;
@@ -27,8 +30,12 @@
 
   &.isPokemon {
     justify-content: flex-start;
+
     .return {
       display: block;
+      svg {
+        color: $white;
+      }
     }
     .organize {
       display: none;

@@ -43,3 +43,11 @@ $type: (
     border: 1px solid darken(map-get($type, $type-key), 20%);
   }
 }
+
+@mixin detail-bg($type-key: 'normal') {
+  @include bg-color($type-key);
+  @include bg-type-image($type-key);
+  .back-name {
+    color: map-get($type, $type-key);
+  }
+}

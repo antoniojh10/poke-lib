@@ -2,4 +2,98 @@
 
 .PokemonDetails {
   color: $type-dark;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 3rem 5vw;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  background-repeat: no-repeat !important;
+  background-position: 70% 25% !important;
+  background-size: 40% !important;
+
+  .Pokemon {
+    flex-direction: row-reverse;
+    padding-top: 4.8rem;
+    padding-right: 1.5rem;
+
+    img {
+      left: -1rem;
+      top: 1.5rem;
+    }
+  }
+
+  .back-name {
+    position: absolute;
+    left: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+
+    font-size: 4rem;
+    background-image: linear-gradient(
+      to top,
+      #ffffff00 20%,
+      #ffffff80
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 6px transparent;
+  }
+
+  &.normal {
+    @include detail-bg('normal');
+  }
+  &.fighting {
+    @include detail-bg('fighting');
+  }
+  &.flying {
+    @include detail-bg('flying');
+  }
+  &.poison {
+    @include detail-bg('poison');
+  }
+  &.ground {
+    @include detail-bg('ground');
+  }
+  &.rock {
+    @include detail-bg('rock');
+  }
+  &.bug {
+    @include detail-bg('bug');
+  }
+  &.ghost {
+    @include detail-bg('ghost');
+  }
+  &.steel {
+    @include detail-bg('steel');
+  }
+  &.fire {
+    @include detail-bg('fire');
+  }
+  &.water {
+    @include detail-bg('water');
+  }
+  &.grass {
+    @include detail-bg('grass');
+  }
+  &.electric {
+    @include detail-bg('electric');
+  }
+  &.psychic {
+    @include detail-bg('psychic');
+  }
+  &.ice {
+    @include detail-bg('ice');
+  }
+  &.dragon {
+    @include detail-bg('dragon');
+  }
+  &.dark {
+    @include detail-bg('dark');
+  }
+  &.fairy {
+    @include detail-bg('fairy');
+  }
 }
