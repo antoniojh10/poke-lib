@@ -1,4 +1,4 @@
-const path = require('path');
+/* const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -11,7 +11,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
-    publicPath: '/poke-lib/',
     chunkFilename: 'js/[id].[chunkhash].js',
   },
   resolve: {
@@ -44,7 +43,7 @@ module.exports = {
             limit: 1000,
             fallback: 'file-loader',
             name: '[hash].[ext]',
-            publicPath: '/poke-lib/assets',
+            publicPath: '/assets',
             outputPath: 'assets',
           },
         },
@@ -58,19 +57,99 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve('./public/index.html'),
+      template: path.resolve(__dirname, 'public/index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
     }),
-    new webpack.DllReferencePlugin({
+     new webpack.DllReferencePlugin({
       manifest: require('./modules-manifest.json'),
     }),
     new AddAssetHtmlPlugin({
       filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
       outputPath: 'js',
       publicPath: '/poke-lib/js',
+    }), 
+  ],
+}; */
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: { loader: 'babel-loader' },
+      },
+      {
+        test: /\.html$/,
+        use: { loader: 'html-loader' },
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 9000,
+              fallback: 'file-loader',
+              name: '[name].[ext]',
+              publicPath: '/fonts',
+              outputPath: 'fonts',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|gif|jpg|jpeg|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 9000,
+              fallback: 'file-loader',
+              name: '[name].[ext]',
+              publicPath: '/img',
+              outputPath: 'img',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'assets/[name].css',
     }),
   ],
 };

@@ -1,8 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, HashRouter, Switch } from 'react-router-dom';
 
 // Components
-import Header from '../components/Header';
 import Home from '../containers/Home';
 import PokemonDetails from '../containers/PokemonDetails';
 
@@ -11,7 +10,7 @@ import '../assets/sass/Globals.scss';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -20,7 +19,7 @@ const App = () => {
           component={PokemonDetails}
         />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

@@ -7,7 +7,6 @@ import useOnePokemon from '../../hooks/useOnePokemon';
 
 // Components
 import Pokemon from './Pokemon';
-import Loader from '../Loader';
 
 // styles
 import '../../assets/sass/components/Card.scss';
@@ -26,6 +25,7 @@ const Card = (props) => {
 };
 
 const LazyCard = (props) => {
+  const { pokemon } = props;
   const [show, setShow] = useState(false);
   const elementRef = useRef();
 
@@ -47,15 +47,15 @@ const LazyCard = (props) => {
     return () => observer.disconnect();
   }, [show]);
 
-  const linkClass = classNames({ show });
+  const linkClass = classNames('LazyDiv', { show });
 
   return (
     <Link
+      to={`/pokemon/${pokemon.name}`}
       className={linkClass}
       ref={elementRef}
-      to={`/pokemon/${props.pokemon.name}`}
     >
-      {show ? <Card pokemon={props.pokemon} /> : null}
+      {show ? <Card pokemon={pokemon} /> : null}
     </Link>
   );
 };

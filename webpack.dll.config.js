@@ -18,9 +18,9 @@ module.exports = {
     filename: 'js/[name].[hash].dll.js',
     library: '[name]',
   },
-  optimization: {
+  /* optimization: {
     minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
-  },
+  }, */
   plugins: [
     new webpack.DllPlugin({
       name: '[name]',
