@@ -537,13 +537,13 @@ body {
   height: 100vh;
   width: 100%; }
 
-.PokeList > a, body {
+.PokeList .LazyDiv, body {
   display: flex; }
 
-.PokeList > a, body {
+.PokeList .LazyDiv, body {
   justify-content: center; }
 
-.PokeList > a {
+.PokeList .LazyDiv {
   align-items: center; }
 
 * {
@@ -572,17 +572,17 @@ input {
 
 .PokeList {
   margin-bottom: 3rem; }
-  .PokeList > a {
+  .PokeList .LazyDiv {
     min-height: 10rem;
     text-decoration: none; }
-    .PokeList > a.show {
+    .PokeList .LazyDiv.show {
       min-height: auto; }
   @media (min-width: 960px) {
     .PokeList {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between; }
-      .PokeList > a {
+      .PokeList .LazyDiv {
         min-width: 31%; } }
   .PokeList .lds-ellipsis div {
     background: #000000; }
