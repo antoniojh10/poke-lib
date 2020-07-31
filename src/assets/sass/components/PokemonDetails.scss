@@ -1,6 +1,7 @@
 @import '../Globals.scss';
 
 .PokemonDetails {
+  overflow: hidden;
   color: $type-dark;
   position: absolute;
   top: 0;
@@ -16,11 +17,15 @@
   .Pokemon {
     flex-direction: row-reverse;
     padding-top: 4.8rem;
-    padding-right: 1.5rem;
 
     img {
-      left: -1rem;
+      left: 0;
       top: 1.5rem;
+      width: auto;
+    }
+
+    div:first-child {
+      width: 50%;
     }
   }
 

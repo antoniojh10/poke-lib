@@ -1,8 +1,10 @@
-/* const path = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
     chunkFilename: 'js/[id].[chunkhash].js',
+    publicPath: '/poke-lib/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -40,7 +43,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 1000,
+            limit: 10000,
             fallback: 'file-loader',
             name: '[hash].[ext]',
             publicPath: '/assets',
@@ -55,6 +58,9 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
@@ -63,93 +69,13 @@ module.exports = {
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
     }),
-     new webpack.DllReferencePlugin({
+    new webpack.DllReferencePlugin({
       manifest: require('./modules-manifest.json'),
     }),
     new AddAssetHtmlPlugin({
       filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
       outputPath: 'js',
       publicPath: '/poke-lib/js',
-    }), 
-  ],
-}; */
-
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: { loader: 'babel-loader' },
-      },
-      {
-        test: /\.html$/,
-        use: { loader: 'html-loader' },
-      },
-      {
-        test: /\.(s*)css$/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader },
-          'css-loader',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 9000,
-              fallback: 'file-loader',
-              name: '[name].[ext]',
-              publicPath: '/fonts',
-              outputPath: 'fonts',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(png|gif|jpg|jpeg|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 9000,
-              fallback: 'file-loader',
-              name: '[name].[ext]',
-              publicPath: '/img',
-              outputPath: 'img',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(js|jsx)$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: './index.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'assets/[name].css',
     }),
   ],
 };

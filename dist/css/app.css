@@ -751,6 +751,7 @@ input {
   padding: 0.3rem; }
 
 .PokemonDetails {
+  overflow: hidden;
   color: #575759;
   position: absolute;
   top: 0;
@@ -764,11 +765,13 @@ input {
   background-size: 40% !important; }
   .PokemonDetails .Pokemon {
     flex-direction: row-reverse;
-    padding-top: 4.8rem;
-    padding-right: 1.5rem; }
+    padding-top: 4.8rem; }
     .PokemonDetails .Pokemon img {
-      left: -1rem;
-      top: 1.5rem; }
+      left: 0;
+      top: 1.5rem;
+      width: auto; }
+    .PokemonDetails .Pokemon div:first-child {
+      width: 50%; }
   .PokemonDetails .back-name {
     position: absolute;
     left: 0;
