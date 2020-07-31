@@ -6,7 +6,8 @@ import useOnePokemon from '../hooks/useOnePokemon';
 
 // Components
 import Header from '../components/Header';
-import Pokemon from '../components/PokeList/Pokemon';
+import Pokemon from '../components/Pokemon';
+import DetailsSection from '../components/DetailsSection';
 
 // styles
 import '../assets/sass/components/PokemonDetails.scss';
@@ -27,6 +28,7 @@ const PokemonDetails = (props) => {
       <div className={detailsClass}>
         <h1 className="back-name">{name}</h1>
         <Pokemon data={info} />
+        <DetailsSection basic={info} types={types} />
       </div>
     </>
   );

@@ -1,0 +1,30 @@
+@import '../Globals.scss';
+
+$top-separation: 40vh;
+
+.DetailsSection {
+  position: absolute;
+  top: $top-separation;
+  left: 0;
+  width: 100%;
+  min-height: 100vh - $top-separation;
+  border-radius: 1rem 1rem 0 0;
+  background-color: $white;
+  padding: 1rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  table tr {
+    line-height: 1.5rem;
+  }
+
+  td:first-child {
+    font-weight: 700;
+    width: 5rem;
+  }
+
+  .hidden-ability {
+    font-weight: 400;
+    font-size: 0.7rem;
+  }
+}

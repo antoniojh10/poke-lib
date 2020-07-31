@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import useOnePokemon from '../../hooks/useOnePokemon';
 
 // Components
-import Pokemon from './Pokemon';
+import Pokemon from '../Pokemon';
 
 // styles
 import '../../assets/sass/components/Card.scss';

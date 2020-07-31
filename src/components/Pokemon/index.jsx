@@ -1,9 +1,7 @@
 import React from 'react';
-import LazyLoad from 'react-lazyload';
 
 // Components
-import TypeBadge from './TypeBadge';
-import Loader from '../Loader';
+import TypeBadge from '../TypeBadge';
 
 // Utils
 import capitalize from '../../utils/capitalized';
@@ -26,7 +24,7 @@ const Pokemon = ({ data }) => {
 
   return Object.keys(data).length !== 0 ? (
     <div className="Pokemon">
-      <div>
+      <div className="simple-data">
         <p>{`#${formatId(id)}`}</p>
         <h1>{capitalize(name)}</h1>
         <div className="types">
@@ -45,9 +43,7 @@ const Pokemon = ({ data }) => {
         />
       </div>
     </div>
-  ) : (
-    <Loader />
-  );
+  ) : null;
 };
 
 export default Pokemon;

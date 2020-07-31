@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Components
-import LazyCard from './Card';
+import LazyCard from '../Card';
 
 // styles
 import '../../assets/sass/components/PokeList.scss';

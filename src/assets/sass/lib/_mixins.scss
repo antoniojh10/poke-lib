@@ -47,7 +47,8 @@ $type: (
 @mixin detail-bg($type-key: 'normal') {
   @include bg-color($type-key);
   @include bg-type-image($type-key);
-  .back-name {
+  .back-name,
+  .title {
     color: map-get($type, $type-key);
   }
 }

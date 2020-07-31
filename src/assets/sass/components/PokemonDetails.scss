@@ -1,7 +1,7 @@
 @import '../Globals.scss';
 
 .PokemonDetails {
-  overflow: hidden;
+  overflow-x: hidden;
   color: $type-dark;
   position: absolute;
   top: 0;
@@ -24,7 +24,7 @@
       width: auto;
     }
 
-    div:first-child {
+    .simple-data {
       width: 50%;
     }
   }
