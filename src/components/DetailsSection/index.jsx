@@ -65,7 +65,7 @@ const DetailsSection = ({ basic, types }) => {
           <br />
         </span>
       ) : (
-        <span className="hidden-ability" key={ability.name}>
+        <span className="minor-fact" key={ability.name}>
           {`${capitalize(ability.name)} (hidden ability)`}
           <br />
         </span>
@@ -180,6 +180,26 @@ const DetailsSection = ({ basic, types }) => {
     }
   };
 
+  const printEggCycles = () => {
+    if (Object.keys(getInfo).length > 0) {
+      const { hatch_counter: eggCyclesCounter } = getInfo;
+      const stepsByCycle = 257;
+      const maxStepsToHatch = Math.round(
+        stepsByCycle * eggCyclesCounter * 1.05
+      );
+      const minStepsToHatch = Math.round(
+        stepsByCycle * eggCyclesCounter * 0.95
+      );
+
+      return (
+        <span>
+          {eggCyclesCounter}{' '}
+          <span className="minor-fact">{`(${minStepsToHatch} - ${maxStepsToHatch} steps)`}</span>
+        </span>
+      );
+    }
+  };
+
   handleData();
 
   return (
@@ -254,7 +274,7 @@ const DetailsSection = ({ basic, types }) => {
           </tr>
           <tr>
             <td>Egg Cycles</td>
-            <td>{getInfo?.base_happiness || 'Loading...'}</td>
+            <td>{printEggCycles() || 'Loading...'}</td>
           </tr>
         </tbody>
       </table>
