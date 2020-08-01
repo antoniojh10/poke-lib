@@ -1,0 +1,12 @@
+@import '../Globals.scss';
+
+.StatBar {
+  height: 5px;
+  width: 8rem;
+  border-radius: 50%;
+
+  &-bar-percentage {
+    height: 100%;
+    border-radius: 2.5px;
+  }
+}

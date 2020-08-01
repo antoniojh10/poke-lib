@@ -53,4 +53,7 @@ $type: (
   .title {
     color: map-get($type, $type-key);
   }
+  .StatBar-bar-percentage {
+    @include bg-color($type-key);
+  }
 }

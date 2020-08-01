@@ -23,9 +23,18 @@ $top-separation: 35vh;
     width: 7rem;
   }
 
+  .Stats-section td:not(:first-child) {
+    text-align: end;
+  }
+
   .minor-fact {
     font-weight: 400;
     font-size: 0.7rem;
+  }
+
+  .mayor-fact {
+    font-weight: 700;
+    font-size: 1rem;
   }
 
   .male-gender {

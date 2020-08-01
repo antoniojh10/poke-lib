@@ -18,6 +18,7 @@ import capitalize from '../../utils/capitalized';
 
 // Components
 import TypeBadge from '../TypeBadge';
+import StatBar from './StatBar';
 
 // styles
 import '../../assets/sass/components/DetailsSection.scss';
@@ -27,6 +28,9 @@ const DetailsSection = ({ basic, types }) => {
   const [genera, setGenera] = useState('');
   const getInfo = useSpecie(basic?.species?.url || '');
   const getTypesInfo = useTypes(types || []);
+
+  const maxIV = 31;
+  const maxEV = 252;
 
   const formatString = (str) => {
     const regEx = /[^(\x20-\x7E)|(à-ÿ)]/gim; // Matches line feed and other weird thins
@@ -200,6 +204,34 @@ const DetailsSection = ({ basic, types }) => {
     }
   };
 
+  const printStat = {
+    base: (statName) => {
+      const base = basic?.stats?.find(
+        (elem) => elem.stat.name === statName
+      );
+      return base?.base_stat;
+    },
+    HP: {
+      min: () => 2 * printStat.base('hp') + 110,
+      max: () => 2 * printStat.base('hp') + maxIV + maxEV / 4 + 110,
+    },
+    Other: {
+      min: (statName) =>
+        Math.floor((2 * printStat.base(statName) + 5) * 0.9),
+      max: (statName) =>
+        Math.floor(
+          (2 * printStat.base(statName) + maxIV + maxEV / 4 + 5) * 1.1
+        ),
+    },
+    Total: () =>
+      printStat.base('hp') +
+      printStat.base('attack') +
+      printStat.base('defense') +
+      printStat.base('special-attack') +
+      printStat.base('special-defense') +
+      printStat.base('speed'),
+  };
+
   handleData();
 
   return (
@@ -278,6 +310,95 @@ const DetailsSection = ({ basic, types }) => {
           </tr>
         </tbody>
       </table>
+      <h4 className="title">Base Stats</h4>
+      <table className="Stats-section">
+        <tbody>
+          <tr>
+            <td>HP</td>
+            <td>{printStat.base('hp') || 'Loading...'}</td>
+            <td>
+              <StatBar base={printStat.base('hp')} />
+            </td>
+            <td>{printStat.HP.min() || 'Loading...'}</td>
+            <td>{printStat.HP.max() || 'Loading...'}</td>
+          </tr>
+          <tr>
+            <td>Attack</td>
+            <td>{printStat.base('attack') || 'Loading...'}</td>
+            <td>
+              <StatBar base={printStat.base('attack')} />
+            </td>
+            <td>{printStat.Other.min('attack') || 'Loading...'}</td>
+            <td>{printStat.Other.max('attack') || 'Loading...'}</td>
+          </tr>
+          <tr>
+            <td>Defense</td>
+            <td>{printStat.base('defense') || 'Loading...'}</td>
+            <td>
+              <StatBar base={printStat.base('defense')} />
+            </td>
+            <td>{printStat.Other.min('defense') || 'Loading...'}</td>
+            <td>{printStat.Other.max('defense') || 'Loading...'}</td>
+          </tr>
+          <tr>
+            <td>Sp.Atk</td>
+            <td>
+              {printStat.base('special-attack') || 'Loading...'}
+            </td>
+            <td>
+              <StatBar base={printStat.base('special-attack')} />
+            </td>
+            <td>
+              {printStat.Other.min('special-attack') || 'Loading...'}
+            </td>
+            <td>
+              {printStat.Other.max('special-attack') || 'Loading...'}
+            </td>
+          </tr>
+          <tr>
+            <td>Sp.Def</td>
+            <td>
+              {printStat.base('special-defense') || 'Loading...'}
+            </td>
+            <td>
+              <StatBar base={printStat.base('special-defense')} />
+            </td>
+            <td>
+              {printStat.Other.min('special-defense') || 'Loading...'}
+            </td>
+            <td>
+              {printStat.Other.max('special-defense') || 'Loading...'}
+            </td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td>{printStat.base('speed') || 'Loading...'}</td>
+            <td>
+              <StatBar base={printStat.base('speed')} />
+            </td>
+            <td>{printStat.Other.min('speed') || 'Loading...'}</td>
+            <td>{printStat.Other.max('speed') || 'Loading...'}</td>
+          </tr>
+
+          <tr>
+            <td>Total</td>
+            <td className="mayor-fact">
+              {printStat.Total() || 'Loading...'}
+            </td>
+            <td>
+              <StatBar />
+            </td>
+            <td>min</td>
+            <td>max</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The ranges shown on the right are for a level 100 Pokémon.
+        Maximum values are based on a beneficial nature, 252 EVs, 31
+        IVs; minimum values are based on a hindering nature, 0 EVs, 0
+        IVs.
+      </p>
     </div>
   );
 };
