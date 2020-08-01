@@ -28,6 +28,18 @@ $top-separation: 35vh;
     font-size: 0.7rem;
   }
 
+  .male-gender {
+    color: $male-gender;
+  }
+
+  .female-gender {
+    color: $female-gender;
+  }
+
+  .genderless {
+    color: $genderless-color;
+  }
+
   .types {
     @extend %d-flex;
     flex-wrap: wrap;

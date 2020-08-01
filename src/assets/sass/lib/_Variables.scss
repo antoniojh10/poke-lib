@@ -24,6 +24,11 @@ $type-dragon: #0c68bf;
 $type-dark: #575759;
 $type-fairy: #ec6dc6;
 
+// Gender colors
+$male-gender: $type-flying;
+$female-gender: $type-fairy;
+$genderless-color: $black;
+
 // Breakpoints
 $desktop: 960px;
 $tablet: 480px;

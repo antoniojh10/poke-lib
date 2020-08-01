@@ -1,4 +1,13 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import {
+  faMars,
+  faVenus,
+  faGenderless,
+  faMarsDouble,
+  faVenusDouble,
+} from '@fortawesome/free-solid-svg-icons';
 
 // hooks
 import useSpecie from '../../hooks/useSpecie';
@@ -111,6 +120,54 @@ const DetailsSection = ({ basic, types }) => {
         </span>
       ));
     }
+    return null;
+  };
+
+  const printGenderRatio = () => {
+    if (Object.keys(getInfo).length > 0) {
+      const { gender_rate: femaleOctaves } = getInfo;
+
+      if (femaleOctaves === -1) {
+        return (
+          <span className="genderless">
+            <FontAwesomeIcon icon={faGenderless} />
+            {' Genderless'}
+          </span>
+        );
+      }
+      if (femaleOctaves === 0) {
+        return (
+          <span className="male-gender">
+            <FontAwesomeIcon icon={faMarsDouble} />
+            {' Only males.'}
+          </span>
+        );
+      }
+      if (femaleOctaves === 8) {
+        return (
+          <span className="female-gender">
+            <FontAwesomeIcon icon={faVenusDouble} />
+            {' Only females.'}
+          </span>
+        );
+      }
+      const femalePercentage = (femaleOctaves * 100) / 8;
+      const malePercentage = 100 - femalePercentage;
+
+      return (
+        <>
+          <span className="female-gender">
+            <FontAwesomeIcon icon={faVenus} />
+            {` ${femalePercentage}%`}
+          </span>
+          {', '}
+          <span className="male-gender">
+            <FontAwesomeIcon icon={faMars} />
+            {` ${malePercentage}%`}
+          </span>
+        </>
+      );
+    }
   };
 
   handleData();
@@ -169,6 +226,23 @@ const DetailsSection = ({ basic, types }) => {
                 getInfo?.growth_rate?.name || 'Loading...'
               )}
             </td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 className="title">Breeding</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td>Gender</td>
+            <td>{printGenderRatio()}</td>
+          </tr>
+          <tr>
+            <td>Egg Groups</td>
+            <td>{getInfo?.capture_rate}</td>
+          </tr>
+          <tr>
+            <td>Egg Cycles</td>
+            <td>{getInfo?.base_happiness}</td>
           </tr>
         </tbody>
       </table>
