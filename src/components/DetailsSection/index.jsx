@@ -170,6 +170,16 @@ const DetailsSection = ({ basic, types }) => {
     }
   };
 
+  const printEggGroups = () => {
+    if (Object.keys(getInfo).length > 0) {
+      const { egg_groups: eggGroups } = getInfo;
+      const eggGroupsNamesArray = eggGroups.map((eggGroup) =>
+        capitalize(eggGroup.name)
+      );
+      return eggGroupsNamesArray.join(', ');
+    }
+  };
+
   handleData();
 
   return (
@@ -180,23 +190,25 @@ const DetailsSection = ({ basic, types }) => {
         <tbody>
           <tr>
             <td>Species</td>
-            <td>{genera}</td>
+            <td>{genera || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Height</td>
-            <td>{`${basic.height / 10}m`}</td>
+            <td>{`${basic.height / 10}m` || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{`${basic.weight / 10}kg`}</td>
+            <td>{`${basic.weight / 10}kg` || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Abilities</td>
-            <td>{printAbilities()}</td>
+            <td>{printAbilities() || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Weaknesses</td>
-            <td className="types">{printWeaknesses()}</td>
+            <td className="types">
+              {printWeaknesses() || 'Loading...'}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -234,15 +246,15 @@ const DetailsSection = ({ basic, types }) => {
         <tbody>
           <tr>
             <td>Gender</td>
-            <td>{printGenderRatio()}</td>
+            <td>{printGenderRatio() || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Egg Groups</td>
-            <td>{getInfo?.capture_rate}</td>
+            <td>{printEggGroups() || 'Loading...'}</td>
           </tr>
           <tr>
             <td>Egg Cycles</td>
-            <td>{getInfo?.base_happiness}</td>
+            <td>{getInfo?.base_happiness || 'Loading...'}</td>
           </tr>
         </tbody>
       </table>
