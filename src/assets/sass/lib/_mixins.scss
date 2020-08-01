@@ -39,8 +39,10 @@ $type: (
   @include bg-color($type-key);
   @include card-shadow($type-key);
   @include bg-type-image($type-key);
-  &:hover {
-    border: 1px solid darken(map-get($type, $type-key), 20%);
+  @media (min-width: $desktop) {
+    &:hover {
+      border: 2px solid darken(map-get($type, $type-key), 20%);
+    }
   }
 }
 

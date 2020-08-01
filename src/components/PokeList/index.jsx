@@ -10,11 +10,13 @@ const PokeList = ({ search, allPokemon }) => {
   const [pokeList, setPokeList] = useState([]);
 
   useEffect(() => {
-    setPokeList(
-      allPokemon.filter(({ name }) => {
-        return name.includes(search);
-      })
+    const listOfPokemonSeacrched = allPokemon.filter(
+      ({ name }, index) => {
+        const pokemonId = (index + 1).toString();
+        return name.includes(search) || pokemonId.includes(search);
+      }
     );
+    setPokeList(listOfPokemonSeacrched);
   }, [search, allPokemon]);
 
   return (

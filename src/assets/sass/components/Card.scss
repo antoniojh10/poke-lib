@@ -17,6 +17,7 @@
 
   @media (min-width: $desktop) {
     min-width: 100%;
+    border: 2px solid transparent;
   }
 
   &.normal {
