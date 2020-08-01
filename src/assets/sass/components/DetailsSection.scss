@@ -30,13 +30,14 @@ $top-separation: 35vh;
 
   .types {
     @extend %d-flex;
-    $darking-type: 10%;
+    flex-wrap: wrap;
+    $darking-type: 0%;
     font-size: 0.8rem;
 
     div {
       @extend %center-v;
       border-radius: 3px;
-      margin: 0 0.2rem;
+      margin: 0.2rem;
       padding: 0.1rem 0.3rem;
       color: $white;
       font-size: 0;

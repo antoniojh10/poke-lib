@@ -25,6 +25,14 @@ const DetailsSection = ({ basic, types }) => {
     return arrayWithoutWeirdThings.join(' ');
   };
 
+  const capitalizeMulti = (str) => {
+    const strArray = str.split('-');
+    const capitalizedStrArray = strArray.map((word) =>
+      capitalize(word)
+    );
+    return capitalizedStrArray.join(' ');
+  };
+
   const handleData = () => {
     if (Object.keys(getInfo).length > 0 && description === '') {
       const enText = getInfo.flavor_text_entries.find(
@@ -85,6 +93,26 @@ const DetailsSection = ({ basic, types }) => {
     return null;
   };
 
+  const printEVYield = () => {
+    const finalArray = [];
+    const evYieldArray =
+      basic?.stats?.filter((elem) => elem.effort > 0) || [];
+    if (evYieldArray.length > 0) {
+      evYieldArray.map((evYield) => {
+        const finalStatName = capitalizeMulti(evYield.stat.name);
+        finalArray.push(`${evYield.effort} ${finalStatName}`);
+        return null;
+      });
+
+      return finalArray.map((stat) => (
+        <span key={stat.split(' ').join('-')}>
+          {stat}
+          <br />
+        </span>
+      ));
+    }
+  };
+
   handleData();
 
   return (
@@ -103,7 +131,7 @@ const DetailsSection = ({ basic, types }) => {
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{`${basic.weight / 100}kg`}</td>
+            <td>{`${basic.weight / 10}kg`}</td>
           </tr>
           <tr>
             <td>Abilities</td>
@@ -112,6 +140,35 @@ const DetailsSection = ({ basic, types }) => {
           <tr>
             <td>Weaknesses</td>
             <td className="types">{printWeaknesses()}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 className="title">Training</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td>EV Yield</td>
+            <td>{printEVYield()}</td>
+          </tr>
+          <tr>
+            <td>Catch Rate</td>
+            <td>{getInfo?.capture_rate}</td>
+          </tr>
+          <tr>
+            <td>Base Friendhip</td>
+            <td>{getInfo?.base_happiness}</td>
+          </tr>
+          <tr>
+            <td>Base Exp</td>
+            <td>{basic.base_experience}</td>
+          </tr>
+          <tr>
+            <td>Growth Rate</td>
+            <td className="types">
+              {capitalizeMulti(
+                getInfo?.growth_rate?.name || 'Loading...'
+              )}
+            </td>
           </tr>
         </tbody>
       </table>
