@@ -16,12 +16,12 @@
 
   .Pokemon {
     flex-direction: row-reverse;
-    padding-top: 4.8rem;
+    padding-top: 4rem;
 
     img {
+      max-height: 10rem;
       left: 0;
-      top: 1.5rem;
-      width: auto;
+      top: 0;
     }
 
     .simple-data {

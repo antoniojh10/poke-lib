@@ -31,6 +31,16 @@ const api = {
       return error.message;
     }
   },
+  getTypeInfo: async (type) => {
+    const url = `${apiBaseURL}type/${type}/`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  },
 };
 
 export default api;

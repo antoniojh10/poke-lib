@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 
 // hooks
 import useSpecie from '../../hooks/useSpecie';
+import useTypes from '../../hooks/useTypes';
 
 // Utils
 import capitalize from '../../utils/capitalized';
+
+// Components
+import TypeBadge from '../TypeBadge';
 
 // styles
 import '../../assets/sass/components/DetailsSection.scss';
@@ -13,6 +17,7 @@ const DetailsSection = ({ basic, types }) => {
   const [description, setDescription] = useState('');
   const [genera, setGenera] = useState('');
   const getInfo = useSpecie(basic?.species?.url || '');
+  const getTypesInfo = useTypes(types || []);
 
   const formatString = (str) => {
     const regEx = /[^(\x20-\x7E)|(à-ÿ)]/gim; // Matches line feed and other weird thins
@@ -51,6 +56,35 @@ const DetailsSection = ({ basic, types }) => {
     });
   };
 
+  const printWeaknesses = () => {
+    const weaknessesList = [];
+    if (
+      Object.keys(getTypesInfo).length === types.length &&
+      Object.keys(getTypesInfo).length !== 0
+    ) {
+      types.map((type) => {
+        const {
+          damage_relations: { double_damage_from: doubleDamage },
+        } = getTypesInfo[type];
+
+        doubleDamage.map((eachType) => {
+          if (!weaknessesList.includes(eachType.name)) {
+            return weaknessesList.push(eachType.name);
+          }
+          return null;
+        });
+        return null;
+      });
+    }
+
+    if (weaknessesList.length > 0) {
+      return weaknessesList.map((type) => (
+        <TypeBadge name={type} key={type} />
+      ));
+    }
+    return null;
+  };
+
   handleData();
 
   return (
@@ -74,6 +108,10 @@ const DetailsSection = ({ basic, types }) => {
           <tr>
             <td>Abilities</td>
             <td>{printAbilities()}</td>
+          </tr>
+          <tr>
+            <td>Weaknesses</td>
+            <td className="types">{printWeaknesses()}</td>
           </tr>
         </tbody>
       </table>

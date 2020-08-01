@@ -35,7 +35,7 @@ const Pokemon = ({ data }) => {
       </div>
       <div>
         <img
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${formatId(
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
             id
           )}.png`}
           loading="lazy"
