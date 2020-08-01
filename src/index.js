@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, compose } from 'redux';
+import Favicon from 'react-favicon';
+import icon from '../public/favicon.ico';
 
 import reducer from './reducers';
 
@@ -18,6 +20,7 @@ const store = createStore(reducer, initialState, composeEnhancers());
 
 ReactDOM.render(
   <Provider store={store}>
+    <Favicon url={icon} />
     <App />
   </Provider>,
 

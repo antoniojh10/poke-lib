@@ -13,7 +13,6 @@ const DetailsSection = ({ basic, types }) => {
   const [description, setDescription] = useState('');
   const [genera, setGenera] = useState('');
   const getInfo = useSpecie(basic?.species?.url || '');
-  console.log(types);
 
   const formatString = (str) => {
     const regEx = /[^(\x20-\x7E)|(à-ÿ)]/gim; // Matches line feed and other weird thins

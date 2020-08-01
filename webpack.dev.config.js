@@ -47,6 +47,10 @@ module.exports = {
         enforce: 'pre',
         use: ['source-map-loader'],
       },
+      {
+        test: /\.ico$/,
+        loader: 'file-loader',
+      },
     ],
   },
   devServer: {

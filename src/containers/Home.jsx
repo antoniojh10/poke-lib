@@ -26,7 +26,6 @@ const Home = (props) => {
     }
 
     fetchAllPokemon();
-    console.log(allPokemon.length);
   }, []);
 
   const handleChange = (event) => {
