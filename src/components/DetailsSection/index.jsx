@@ -232,6 +232,62 @@ const DetailsSection = ({ basic, types }) => {
       printStat.base('speed'),
   };
 
+  const printTypeDefenses = () => {
+    const allTypes = {
+      normal: 1,
+      fighting: 1,
+      flying: 1,
+      poison: 1,
+      ground: 1,
+      rock: 1,
+      bug: 1,
+      ghost: 1,
+      steel: 1,
+      fire: 1,
+      water: 1,
+      grass: 1,
+      electric: 1,
+      psychic: 1,
+      ice: 1,
+      dragon: 1,
+      dark: 1,
+      fairy: 1,
+    };
+
+    if (
+      Object.keys(getTypesInfo).length === types.length &&
+      Object.keys(getTypesInfo).length !== 0
+    ) {
+      Object.keys(getTypesInfo).map((type) => {
+        const {
+          damage_relations: {
+            double_damage_from: doubleDamage,
+            half_damage_from: halfDamage,
+            no_damage_from: inmune,
+          },
+        } = getTypesInfo[type];
+
+        doubleDamage.map((type) => (allTypes[type.name] *= 2));
+        halfDamage.map((type) => (allTypes[type.name] *= 0.5));
+        inmune.map((type) => (allTypes[type.name] = 0));
+      });
+
+      Object.keys(allTypes).map((type) => {
+        if (allTypes[type] === 1) allTypes[type] = ' ';
+        if (allTypes[type] === 0.5) allTypes[type] = '½';
+        if (allTypes[type] === 0.25) allTypes[type] = '¼';
+      });
+
+      return Object.keys(allTypes).map((type) => (
+        <div>
+          <TypeBadge name={type} />
+          <h5>{allTypes[type]}</h5>
+        </div>
+      ));
+    }
+    //Object.keys(allTypes).map((type) => console.log(type));
+  };
+
   handleData();
 
   return (
@@ -399,6 +455,14 @@ const DetailsSection = ({ basic, types }) => {
         IVs; minimum values are based on a hindering nature, 0 EVs, 0
         IVs.
       </p>
+      <h4 className="title">Type Defenses</h4>
+      <p>
+        The effectiveness of each type on{' '}
+        {capitalize(basic?.name || 'Loading...')}.
+      </p>
+      <div className="types">
+        {printTypeDefenses() || 'Loading...'}
+      </div>
     </div>
   );
 };

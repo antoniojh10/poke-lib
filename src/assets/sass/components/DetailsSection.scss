@@ -49,6 +49,24 @@ $top-separation: 35vh;
     color: $genderless-color;
   }
 
+  div.types {
+    margin-bottom: 15rem;
+    div {
+      flex-direction: column;
+      padding: 0.3rem 0.3rem;
+      margin: 0;
+      h5 {
+        font-size: 0.8rem;
+        margin: 0;
+        margin-top: 0.2rem;
+        color: $gray;
+      }
+    }
+    > div {
+      padding: 0.2rem;
+    }
+  }
+
   .types {
     @extend %d-flex;
     flex-wrap: wrap;
