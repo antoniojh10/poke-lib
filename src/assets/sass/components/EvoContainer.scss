@@ -1,0 +1,41 @@
+@import '../Globals.scss';
+
+.EvoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.isUnique {
+    justify-content: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+
+  img {
+    max-width: 5rem;
+  }
+
+  h4,
+  .mini-pokemon {
+    text-align: center;
+  }
+
+  h4 {
+    max-width: 7rem;
+  }
+
+  .mini-pokemon {
+    h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

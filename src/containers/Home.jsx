@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import api from '../lib/api';
-
-// Actions
-import { setPokemonList } from '../actions';
 
 // Components
 import Header from '../components/Header';
@@ -15,18 +11,9 @@ import PokeList from '../components/PokeList';
 // styles
 import '../assets/sass/components/Home.scss';
 
-const Home = (props) => {
-  const { allPokemon } = props;
+const Home = () => {
+  const allPokemon = useSelector((state) => state.allPokemon);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    async function fetchAllPokemon() {
-      const response = await api.getAllPokemon();
-      props.setPokemonList([...response.results]);
-    }
-
-    fetchAllPokemon();
-  }, []);
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -36,7 +23,9 @@ const Home = (props) => {
     <>
       <Header />
       <h1>Pokedex</h1>
-      <p>Search for Pokemon by name.</p>
+      <p>
+        Search Pokémon by name or using the National Pokédex number.
+      </p>
       <div className="Search">
         <input
           type="text"
@@ -55,12 +44,4 @@ const Home = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  allPokemon: state.allPokemon,
-});
-
-const mapDispatchToProps = {
-  setPokemonList,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

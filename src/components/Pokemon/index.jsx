@@ -4,7 +4,7 @@ import React from 'react';
 import TypeBadge from '../TypeBadge';
 
 // Utils
-import capitalize from '../../utils/capitalized';
+import { formatPokemonName } from '../../utils/formatName';
 
 // styles
 import '../../assets/sass/components/Pokemon.scss';
@@ -26,7 +26,7 @@ const Pokemon = ({ data }) => {
     <div className="Pokemon">
       <div className="simple-data">
         <p>{`#${formatId(id)}`}</p>
-        <h1>{capitalize(name)}</h1>
+        <h1>{formatPokemonName(name)}</h1>
         <div className="types">
           {types.map(({ type: { name: tName } }) => (
             <TypeBadge name={tName} key={`${name}${tName}`} />

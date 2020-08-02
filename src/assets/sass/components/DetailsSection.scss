@@ -50,7 +50,6 @@ $top-separation: 35vh;
   }
 
   div.types {
-    margin-bottom: 15rem;
     div {
       flex-direction: column;
       padding: 0.3rem 0.3rem;
@@ -65,6 +64,10 @@ $top-separation: 35vh;
     > div {
       padding: 0.2rem;
     }
+  }
+
+  .evolution-chart {
+    margin-bottom: 15rem;
   }
 
   .types {

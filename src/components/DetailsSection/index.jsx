@@ -11,6 +11,7 @@ import {
 
 // hooks
 import useSpecie from '../../hooks/useSpecie';
+import useEvolution from '../../hooks/useEvolution';
 import useTypes from '../../hooks/useTypes';
 
 // Utils
@@ -19,6 +20,7 @@ import capitalize from '../../utils/capitalized';
 // Components
 import TypeBadge from '../TypeBadge';
 import StatBar from './StatBar';
+import EvoContainer from './EvoContainer';
 
 // styles
 import '../../assets/sass/components/DetailsSection.scss';
@@ -28,6 +30,8 @@ const DetailsSection = ({ basic, types }) => {
   const [genera, setGenera] = useState('');
   const getInfo = useSpecie(basic?.species?.url || '');
   const getTypesInfo = useTypes(types || []);
+  const { evolution_chain: evolutionChain } = getInfo;
+  const getEvolutionInfo = useEvolution(evolutionChain?.url || '');
 
   const maxIV = 31;
   const maxEV = 252;
@@ -279,13 +283,23 @@ const DetailsSection = ({ basic, types }) => {
       });
 
       return Object.keys(allTypes).map((type) => (
-        <div>
+        <div key={type}>
           <TypeBadge name={type} />
           <h5>{allTypes[type]}</h5>
         </div>
       ));
     }
-    //Object.keys(allTypes).map((type) => console.log(type));
+  };
+
+  const printEvolutionChart = () => {
+    if (Object.keys(getEvolutionInfo).length > 0) {
+      return getEvolutionInfo.map((oneEvolution) => (
+        <EvoContainer
+          key={oneEvolution.number2}
+          evolutionInfo={oneEvolution}
+        />
+      ));
+    }
   };
 
   handleData();
@@ -463,6 +477,8 @@ const DetailsSection = ({ basic, types }) => {
       <div className="types">
         {printTypeDefenses() || 'Loading...'}
       </div>
+      <h4 className="title">Evolution Chart</h4>
+      <div className="evolution-chart">{printEvolutionChart()}</div>
     </div>
   );
 };
