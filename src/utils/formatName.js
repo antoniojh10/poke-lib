@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
@@ -10,22 +10,8 @@ export const formatName = (str) => {
   return strArray.join(' ');
 };
 
-export const formatPokemonName = (str) => {
-  let strArray = str.split('-');
-  if (str.includes('-f') && !str.includes('u-f')) {
-    return (
-      <Fragment>
-        Nidoran <FontAwesomeIcon icon={faVenus} />
-      </Fragment>
-    );
-  }
-  if (str.includes('n-m')) {
-    return (
-      <Fragment>
-        Nidoran <FontAwesomeIcon icon={faMars} />
-      </Fragment>
-    );
-  }
+export const cleanName = (str) => {
+  const strArray = str.split('-');
   if (
     strArray[0] === 'deoxys' ||
     strArray[0] === 'giratina' ||
@@ -43,14 +29,33 @@ export const formatPokemonName = (str) => {
     strArray[0] === 'pumpkaboo' ||
     strArray[0] === 'gourgeist' ||
     strArray[0] === 'oricorio' ||
-    strArray[0] === 'lycanrock' ||
+    strArray[0] === 'lycanroc' ||
     strArray[0] === 'wishiwashi' ||
     strArray[0] === 'minior' ||
     strArray[0] === 'mimikyu'
   ) {
-    return capitalize(strArray[0]);
+    return strArray[0];
+  }
+  return strArray.join('-');
+};
+
+export const formatPokemonName = (str) => {
+  let strArray = cleanName(str);
+  if (str.includes('-f') && !str.includes('u-f')) {
+    return (
+      <>
+        Nidoran <FontAwesomeIcon icon={faVenus} />
+      </>
+    );
+  }
+  if (str.includes('n-m')) {
+    return (
+      <>
+        Nidoran <FontAwesomeIcon icon={faMars} />
+      </>
+    );
   }
 
-  strArray = strArray.map((word) => capitalize(word));
+  strArray = strArray.split('-').map((word) => capitalize(word));
   return strArray.join(' ');
 };

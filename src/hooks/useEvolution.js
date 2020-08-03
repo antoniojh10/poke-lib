@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { cleanName } from '../utils/formatName';
+
 import api from '../lib/api';
 
 const useEvolution = (url) => {
@@ -10,9 +12,10 @@ const useEvolution = (url) => {
 
   const simplifyEvolution = (arrayResponse, nameBase) => {
     if (arrayResponse.length === 0) {
+      console.log(nameBase);
       let number1;
       pokemonList.map((pokemon, index) => {
-        if (pokemon.name === nameBase) {
+        if (cleanName(pokemon.name) === nameBase) {
           number1 = index + 1;
         }
       });
@@ -37,10 +40,10 @@ const useEvolution = (url) => {
       } = evol;
 
       pokemonList.map((pokemon, index) => {
-        if (pokemon.name === nameBase) {
+        if (cleanName(pokemon.name) === nameBase) {
           number1 = index + 1;
         }
-        if (pokemon.name === nameEvo) {
+        if (cleanName(pokemon.name) === nameEvo) {
           number2 = index + 1;
         }
       });
@@ -52,8 +55,7 @@ const useEvolution = (url) => {
       }
 
       const methods = Object.entries(formEvo[0]).filter(
-        (entry) =>
-          entry[1] !== null && entry[1] !== false && entry[1] !== ''
+        (entry) => entry[1] !== null && entry[1] !== false && entry[1] !== ''
       );
 
       methods.map((met) => {
@@ -85,9 +87,7 @@ const useEvolution = (url) => {
 
   useEffect(() => {
     async function getEvolutionChainData() {
-      api
-        .getResource(url)
-        .then((response) => setEvolutionMap(response));
+      api.getResource(url).then((response) => setEvolutionMap(response));
     }
     if (url !== '' && Object.keys(evolutionMap).length === 0) {
       getEvolutionChainData();
