@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import capitalize from '../../utils/capitalized';
-import { formatName } from '../../utils/formatName';
+import { formatName, formatPokemonName } from '../../utils/formatName';
 import '../../assets/sass/components/EvoContainer.scss';
 
 const EvoContainer = ({ evolutionInfo }) => {
@@ -35,7 +35,7 @@ const EvoContainer = ({ evolutionInfo }) => {
           alt={baseUnique}
         />
         <p>#{formatId(number1)}</p>
-        <h5>{capitalize(baseUnique)}</h5>
+        <h5>{formatPokemonName(baseUnique)}</h5>
       </div>
     );
   };
@@ -84,11 +84,7 @@ const EvoContainer = ({ evolutionInfo }) => {
         </h4>
       );
     }
-    if (
-      trigger === 'level-up' &&
-      how.known_move_type &&
-      how.min_affection
-    ) {
+    if (trigger === 'level-up' && how.known_move_type && how.min_affection) {
       return (
         <h4>
           Level up with
@@ -171,7 +167,7 @@ const EvoContainer = ({ evolutionInfo }) => {
             alt={base}
           />
           <p>#{formatId(number1)}</p>
-          <h5>{capitalize(base)}</h5>
+          <h5>{formatPokemonName(base)}</h5>
         </div>
         <div>{printMethod()}</div>
         <div className="mini-pokemon">
@@ -182,7 +178,7 @@ const EvoContainer = ({ evolutionInfo }) => {
             alt={evolved}
           />
           <p>#{formatId(number2)}</p>
-          <h5>{capitalize(evolved)}</h5>
+          <h5>{formatPokemonName(evolved)}</h5>
         </div>
       </>
     );
@@ -195,9 +191,7 @@ const EvoContainer = ({ evolutionInfo }) => {
 
   return (
     <div className={evolutionClass}>
-      {trigger !== false
-        ? printEvolutionCouple()
-        : printHasNoEvolution()}
+      {trigger !== false ? printEvolutionCouple() : printHasNoEvolution()}
     </div>
   );
 };
