@@ -50,6 +50,60 @@ const EvoContainer = ({ evolutionInfo }) => {
         </h4>
       );
     }
+    if (trigger === 'level-up' && how.turn_upside_down) {
+      return (
+        <h4>
+          Level {how.min_level}
+          <br />
+          (hold game system upside-down)
+        </h4>
+      );
+    }
+    if (trigger === 'level-up' && how.needs_overworld_rain) {
+      return (
+        <h4>
+          Level {how.min_level}
+          <br />
+          (while raining or foggy)
+        </h4>
+      );
+    }
+    if (trigger === 'level-up' && how.party_type) {
+      return (
+        <h4>
+          Level {how.min_level}
+          <br />
+          with a {capitalize(how.party_type)} type in party
+        </h4>
+      );
+    }
+    if (
+      trigger === 'level-up' &&
+      how.min_level &&
+      how.relative_physical_stats
+    ) {
+      if (how.relative_physical_stats === 1) {
+        return (
+          <h4>
+            Level {how.min_level} and Attack{'>'}Defense
+          </h4>
+        );
+      }
+      if (how.relative_physical_stats === -1) {
+        return (
+          <h4>
+            Level {how.min_level} and Attack{'<'}Defense
+          </h4>
+        );
+      }
+    }
+    if (
+      trigger === 'level-up' &&
+      how.min_level &&
+      how.relative_physical_stats === 0
+    ) {
+      return <h4>Level {how.min_level} and Attack=Defense</h4>;
+    }
     if (trigger === 'level-up' && how.held_item && how.time_of_day) {
       return (
         <h4>
@@ -71,6 +125,15 @@ const EvoContainer = ({ evolutionInfo }) => {
     }
     if (trigger === 'level-up' && how.min_level) {
       return <h4>Level {how.min_level}</h4>;
+    }
+    if (trigger === 'level-up' && how.min_happiness && how.time_of_day) {
+      return (
+        <h4>
+          Level up with high Friendship
+          <br />
+          (only in the {how.time_of_day})
+        </h4>
+      );
     }
     if (trigger === 'level-up' && how.min_happiness) {
       return <h4>Level up with high Friendship</h4>;
@@ -101,6 +164,24 @@ const EvoContainer = ({ evolutionInfo }) => {
           Level up in
           <br />
           {formatName(how.location)}
+        </h4>
+      );
+    }
+    if (trigger === 'level-up' && how.party_species) {
+      return (
+        <h4>
+          Level up with
+          <br />
+          {capitalize(how.party_species)} in party
+        </h4>
+      );
+    }
+    if (trigger === 'level-up' && how.min_beauty) {
+      return (
+        <h4>
+          Level up with
+          <br />
+          with high Beauty
         </h4>
       );
     }
@@ -150,6 +231,19 @@ const EvoContainer = ({ evolutionInfo }) => {
         <h4>
           Trade for a<br />
           {capitalize(how.trade_species)}
+        </h4>
+      );
+    }
+    if (trigger === 'shed') {
+      return (
+        <h4>
+          Level 20
+          <br />
+          if Poke Ball
+          <br />
+          in bag and a
+          <br />
+          space un party
         </h4>
       );
     }
