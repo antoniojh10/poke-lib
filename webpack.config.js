@@ -47,7 +47,6 @@ module.exports = {
             limit: 1000,
             fallback: 'file-loader',
             name: '[hash].[ext]',
-            /* publicPath: '/assets', */
             outputPath: 'assets',
           },
         },

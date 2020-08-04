@@ -6,8 +6,8 @@ import { setPokemonList } from '../actions';
 import api from '../lib/api';
 
 // Components
-import Home from '../containers/Home';
-import PokemonDetails from '../containers/PokemonDetails';
+import Home from '../pages/Home';
+import PokemonDetails from '../pages/PokemonDetails';
 
 // Styles
 import '../assets/sass/Globals.scss';
@@ -38,11 +38,7 @@ const App = () => {
     <HashRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route
-          exact
-          path="/pokemon/:name"
-          component={PokemonDetails}
-        />
+        <Route exact path="/pokemon/:name" component={PokemonDetails} />
       </Switch>
     </HashRouter>
   );
