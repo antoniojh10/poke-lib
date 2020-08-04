@@ -25,21 +25,6 @@ const EvoContainer = ({ evolutionInfo }) => {
     return `${id}`;
   };
 
-  const printHasNoEvolution = () => {
-    return (
-      <div className="mini-pokemon">
-        <img
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
-            number1
-          )}.png`}
-          alt={baseUnique}
-        />
-        <p>#{formatId(number1)}</p>
-        <h5>{formatPokemonName(baseUnique)}</h5>
-      </div>
-    );
-  };
-
   const printMethod = () => {
     if (trigger === 'level-up' && how.min_level && how.time_of_day) {
       return (
@@ -243,11 +228,26 @@ const EvoContainer = ({ evolutionInfo }) => {
           <br />
           in bag and a
           <br />
-          space un party
+          space in party
         </h4>
       );
     }
     return 'Flecha';
+  };
+
+  const printHasNoEvolution = () => {
+    return (
+      <div className="mini-pokemon">
+        <img
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatId(
+            number1
+          )}.png`}
+          alt={baseUnique}
+        />
+        <p>#{formatId(number1)}</p>
+        <h5>{formatPokemonName(baseUnique)}</h5>
+      </div>
+    );
   };
 
   const printEvolutionCouple = () => {

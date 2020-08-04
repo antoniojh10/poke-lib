@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+// Actions
+import { onSearch } from '../actions';
 
 // Components
 import Header from '../components/Header';
@@ -12,8 +15,16 @@ import PokeList from '../components/PokeList';
 import '../assets/sass/components/Home.scss';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const allPokemon = useSelector((state) => state.allPokemon);
-  const [search, setSearch] = useState('');
+  const search = useSelector((state) => state.search);
+
+  const setSearch = useCallback(
+    (searchInput) => {
+      return dispatch(onSearch(searchInput));
+    },
+    [dispatch]
+  );
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -23,9 +34,7 @@ const Home = () => {
     <>
       <Header />
       <h1>Pokedex</h1>
-      <p>
-        Search Pokémon by name or using the National Pokédex number.
-      </p>
+      <p>Search Pokémon by name or using the National Pokédex number.</p>
       <div className="Search">
         <input
           type="text"
@@ -36,10 +45,7 @@ const Home = () => {
         <FontAwesomeIcon icon={faSearch} />
       </div>
 
-      <PokeList
-        search={search.toLowerCase()}
-        allPokemon={allPokemon}
-      />
+      <PokeList search={search.toLowerCase()} allPokemon={allPokemon} />
     </>
   );
 };

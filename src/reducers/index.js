@@ -1,4 +1,4 @@
-import { SET_POKEMON_LIST, SET_POKEMON_BASIC } from '../types';
+import { SET_POKEMON_LIST, SET_POKEMON_BASIC, ON_SEARCH } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -9,6 +9,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         pokemons: [...state.pokemons, action.payload],
+      };
+
+    case ON_SEARCH:
+      return {
+        ...state,
+        search: action.payload,
       };
 
     default:
