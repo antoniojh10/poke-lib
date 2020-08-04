@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].js',
+    filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[id].[chunkhash].js',
     publicPath: '/poke-lib/',
   },
@@ -43,10 +44,10 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
+            limit: 1000,
             fallback: 'file-loader',
             name: '[hash].[ext]',
-            publicPath: '/assets',
+            /* publicPath: '/assets', */
             outputPath: 'assets',
           },
         },
@@ -70,8 +71,8 @@ module.exports = {
       template: path.resolve(__dirname, 'public/index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }),
     new webpack.DllReferencePlugin({
       manifest: require('./modules-manifest.json'),
@@ -80,6 +81,9 @@ module.exports = {
       filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
       outputPath: 'js',
       publicPath: '/poke-lib/js',
+    }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/app.*'],
     }),
   ],
 };
