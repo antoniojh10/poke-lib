@@ -18,6 +18,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allPokemon = useSelector((state) => state.allPokemon);
   const search = useSelector((state) => state.search);
+  const sortBy = useSelector((state) => state.sortBy);
 
   const setSearch = useCallback(
     (searchInput) => {
@@ -45,7 +46,11 @@ const Home = () => {
         <FontAwesomeIcon icon={faSearch} />
       </div>
 
-      <PokeList search={search.toLowerCase()} allPokemon={allPokemon} />
+      <PokeList
+        search={search.toLowerCase()}
+        allPokemon={allPokemon}
+        sortBy={sortBy}
+      />
     </>
   );
 };

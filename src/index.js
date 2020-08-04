@@ -13,7 +13,12 @@ const initialState = {
   allPokemon: [],
   pokemons: [],
   search: '',
+  sortBy: 'random',
 };
+
+/*
+sort: 'random', 'a-z', 'z-a', reverse, classic
+*/
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, initialState, composeEnhancers());
