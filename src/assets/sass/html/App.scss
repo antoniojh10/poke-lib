@@ -1,3 +1,4 @@
+@import '../Globals.scss';
 * {
   box-sizing: border-box;
 }
@@ -19,3 +20,5 @@ body {
 h1 {
   font-family: $MontseM;
 }
+
+@import './input';

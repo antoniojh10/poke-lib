@@ -11,6 +11,7 @@ import PokemonDetails from '../pages/PokemonDetails';
 
 // Styles
 import '../assets/sass/Globals.scss';
+import '../assets/sass/html/App.scss';
 
 const App = () => {
   const allPokemon = useSelector((state) => state.allPokemon);
