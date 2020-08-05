@@ -10,7 +10,7 @@ const PokeList = ({ search, allPokemon, sortBy }) => {
   const [pokeList, setPokeList] = useState([]);
 
   useEffect(() => {
-    const allSortedPokemon = allPokemon;
+    const allSortedPokemon = [].concat(allPokemon);
     if (sortBy === 'random') {
       allSortedPokemon.sort(() => (Math.random() * 10 < 5 ? 1 : -1));
     }
@@ -33,7 +33,8 @@ const PokeList = ({ search, allPokemon, sortBy }) => {
       return name.includes(search) || pokemonId.includes(search);
     });
     setPokeList(listOfPokemonSearched);
-  }, [search, allPokemon]);
+    return () => setPokeList([]);
+  }, [search, allPokemon, sortBy]);
 
   return (
     <div className="PokeList">

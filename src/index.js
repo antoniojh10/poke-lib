@@ -14,6 +14,7 @@ const initialState = {
   pokemons: [],
   search: '',
   sortBy: 'random',
+  menuSort: false,
 };
 
 /*

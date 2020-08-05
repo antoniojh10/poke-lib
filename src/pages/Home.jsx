@@ -10,6 +10,7 @@ import { onSearch } from '../actions';
 // Components
 import Header from '../components/Header';
 import PokeList from '../components/PokeList';
+import Menu from '../components/Menu';
 
 // styles
 import '../assets/sass/components/Home.scss';
@@ -51,6 +52,7 @@ const Home = () => {
         allPokemon={allPokemon}
         sortBy={sortBy}
       />
+      <Menu />
     </>
   );
 };

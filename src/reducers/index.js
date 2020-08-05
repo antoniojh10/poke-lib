@@ -1,4 +1,10 @@
-import { SET_POKEMON_LIST, SET_POKEMON_BASIC, ON_SEARCH } from '../types';
+import {
+  SET_POKEMON_LIST,
+  SET_POKEMON_BASIC,
+  ON_SEARCH,
+  TOGGLE_MENU_SORT,
+  SET_SORT,
+} from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -15,6 +21,19 @@ const reducer = (state, action) => {
       return {
         ...state,
         search: action.payload,
+      };
+
+    case TOGGLE_MENU_SORT:
+      return {
+        ...state,
+        menuSort: action.payload,
+      };
+
+    case SET_SORT:
+      return {
+        ...state,
+        sortBy: action.payload,
+        menuSort: false,
       };
 
     default:
